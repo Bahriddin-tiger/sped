@@ -1,5 +1,6 @@
 var elForm = document.querySelector(".speid__form");
 var elInput = document.querySelector(".form__input1");
+var elError = document.querySelector(".js__error")
 var elResult1 = document.querySelector(".js-result1");
 var elResult2 = document.querySelector(".js-result2");
 var elResult3 = document.querySelector(".js-result3");
@@ -42,20 +43,21 @@ elForm.addEventListener("submit", function (e) {
 
     var inputval = +elInput.value;
 
-    // if(inputval <= 0 || isNaN(inputval)) {
-    //     jsResult1.textContent = "siz hato kiritiz!"
-    //     jsResult.classList.remove("result-success");
-    //     jsResult.classList.add("result-error");
-    //     jsInput.classList.remove("is-valid")
-    //     jsInput.classList.add("is-invalid")
-    //     return;
-    //   }
-    //   else {
-    //     jsResult.classList.remove("result-error");
-    //     jsResult.classList.add("result-success");
-    //     jsInput.classList.remove("is-invalid")
-    //     jsInput.classList.add("is-valid")
-    //   }
+    if(inputval <= 0 || isNaN(inputval)) {
+        elError.textContent = "ahmoq masofa manfiy bolmaydi!"
+        elError.classList.remove("result-success");
+        elError.classList.add("result-error");
+        elInput.classList.remove("is-valid")
+        elInput.classList.add("is-invalid")
+        return;
+      }
+      else {
+        elError.classList.remove("result-error");
+        elError.classList.add("result-success");
+        elInput.classList.remove("is-invalid")
+        elInput.classList.add("is-valid")
+      }
+
     elResult1.textContent = Math.floor(timeclokcch(inputval)/3600);
     elResult5.textContent = Math.floor((timeclokcch(inputval) - (Math.floor(timeclokcch(inputval)/3600)*3600 )) / 60) ;
     elResult6.textContent = Math.floor(timeclokcch(inputval)-  elResult1.textContent * 3600 - elResult5.textContent * 60);
